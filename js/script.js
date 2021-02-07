@@ -1,7 +1,9 @@
-const dino = document.querySelector(".dino");
-const background = document.querySelector(".background");
+const char = document.querySelector(".char");
+const scenario = document.querySelector(".scenario");
 let isJumping = false;
+let isGameOver = false;
 let position = 0;
+let pontos = 0;
 
 function pressionaTeclaCima(evento) {
     if (event.keyCode === 32) {
@@ -12,26 +14,25 @@ function pressionaTeclaCima(evento) {
 }
 
 function jump() {
-    let position = 0;
     isJumping = true;
     let upInterval = setInterval(() => {
-        if (position >= 150) {
+        if (position >= 210) {
             clearInterval(upInterval);
 
-            //Queda do dino
+            //Queda do char
             let downInterval = setInterval(() => {
                 if (position <= 0) {
                     clearInterval(downInterval);
                     isJumping = false;
                 } else {
                     position -= 20;
-                    dino.style.bottom = position + 'px';
+                    char.style.bottom = position + 'px';
                 }
             }, 20);
         } else {
-            //Pulo do Dino
+            //Pulo do char
             position += 20;
-            dino.style.bottom = position + 'px';
+            char.style.bottom = position + 'px';
         }
     }, 20);
 }
@@ -42,13 +43,16 @@ function createCactus() {
     let randomTime = Math.random() * 6000;
 
     cactus.classList.add('cactus');
-    cactus.style.left = 1000 + 'px';
-    background.appendChild(cactus);
+    scenario.appendChild(cactus);
+    cactus.style.left = cactusPosition + 'px';
 
     let leftInterval = setInterval(() => {
         if (cactusPosition < -60) {
             clearInterval(leftInterval);
-            background.removeChild(cactus);
+            scenario.removeChild(cactus);
+            pontos++;
+            let placar = document.createElement('div');
+            scenario.appendChild(placar);
         } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
             //Game over
             clearInterval(leftInterval);
@@ -61,5 +65,6 @@ function createCactus() {
 
     setTimeout(createCactus, randomTime);
 }
+
 createCactus();
 document.addEventListener('keyup', pressionaTeclaCima)

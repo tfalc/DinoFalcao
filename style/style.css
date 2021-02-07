@@ -1,14 +1,36 @@
-body{
-    background: #FAFAFA;
+body {
+    background: #fafafa;
 }
 
-.dino {
+.bg-gradient {
+    background: #06a2eb;
+    background: -moz-linear-gradient(top, #06a2eb 0%, #FAFAFA 100%);
+    background: -webkit-linear-gradient(top, #06a2eb 0%, #FAFAFA 100%);
+    background: linear-gradient(to bottom, #06a2eb 0%, #FAFAFA 100%);
+}
+
+#placar {
+	width: 450px;
+	height: 50px;
+	position: absolute;
+	left: 5px;
+	top: 590px;
+}
+
+.char {
     width: 60px;
     height: 60px;
-    position: absolute;
+    background: url(../img/walk1.png) left center;
+    animation: play 1.2s steps(6) infinite;
     bottom: 0;
-    background-image: url(../img/dino.png);
+    position: absolute;
+}
+
+@keyframes play {
+    100% {
+        background-position: -1930px;
     }
+}
 
 .cactus {
     position: absolute;
@@ -18,28 +40,29 @@ body{
     background-image: url(../img/cactus.png);
 }
 
-.game-over{
+.game-over {
     text-align: center;
     color: #666;
     margin-top: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-@keyframes slideright{
+@keyframes slideright {
     from {
-        background-position: 70000%;
+        background-position: 200%;
     }
-    to{
+
+    to {
         background-position: 0%;
     }
 }
 
-.background{
+.scenario {
     position: absolute;
     bottom: 0;
     background-image: url(../img/background.png);
     background-repeat: repeat-x;
-    animation: slideright 600s infinite linear;
+    animation: slideright 20s infinite linear;
     width: 100%;
-    height: 200px;
+    height: 28%;
 }
